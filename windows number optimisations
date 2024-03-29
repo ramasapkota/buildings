@@ -1,0 +1,48 @@
+lass WindowOptimizer:
+    def __init__(self, room_area, natural_light_preference, energy_efficiency_preference):
+        self.room_area = room_area
+        self.natural_light_preference = natural_light_preference
+        self.energy_efficiency_preference = energy_efficiency_preference
+
+    def optimize_window_size(self):
+        # Calculate initial window area as a percentage of the room area
+        initial_window_area_percentage = 10  # Starting with a 10% window-to-wall ratio
+        initial_window_area = self.room_area * initial_window_area_percentage / 100
+
+        # Adjust window size based on preferences
+        if self.natural_light_preference == 'high':
+            # Increase window size for more natural light
+            window_area = initial_window_area * 1.2
+        elif self.natural_light_preference == 'low':
+            # Decrease window size for less natural light
+            window_area = initial_window_area * 0.8
+        else:
+            window_area = initial_window_area
+
+        if self.energy_efficiency_preference == 'high':
+            # Decrease window size for higher energy efficiency
+            window_area *= 0.8
+        elif self.energy_efficiency_preference == 'low':
+            # Increase window size for lower energy efficiency
+            window_area *= 1.2
+
+        return window_area
+
+def main():
+    # Input room area
+    room_area = float(input("Enter the area of the room (in square meters): "))
+
+    # Input user preferences for natural light and energy efficiency
+    natural_light_preference = input("Enter your preference for natural light (high/low): ").lower()
+    energy_efficiency_preference = input("Enter your preference for energy efficiency (high/low): ").lower()
+
+    # Create WindowOptimizer object
+    window_optimizer = WindowOptimizer(room_area, natural_light_preference, energy_efficiency_preference)
+
+    # Optimize window size
+    optimized_window_size = window_optimizer.optimize_window_size()
+
+    print("Optimized window size: {:.2f} square meters".format(optimized_window_size))
+
+if __name__ == "__main__":
+    main()
